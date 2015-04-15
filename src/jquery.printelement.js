@@ -63,12 +63,16 @@
 
         var popupOrIframe = null;
         var documentToWriteTo = null;
+        var currentWindowCounter = $.fn.printElement.windowCounter;
+        $.fn.printElement.windowCounter++;
         if (opts.printMode.toLowerCase() === 'popup') {
-            popupOrIframe = window.open('about:blank', 'printElementWindow', 'width=650,height=440,scrollbars=yes');
+            // IE duplication name bug: http://stackoverflow.com/questions/7146767/i-get-access-is-denied-when-i-try-to-print-a-page-using-jquery-printelement-js
+            var windowName = 'printElementWindow' + currentWindowCounter;
+            popupOrIframe = window.open('about:blank', windowName, 'width=650,height=440,scrollbars=yes');
             documentToWriteTo = popupOrIframe.document;
         } else {
             //The random ID is to overcome a safari bug http://www.cjboco.com.sharedcopy.com/post.cfm/442dc92cd1c0ca10a5c35210b8166882.html
-            var printElementID = "printElement_" + (Math.round(Math.random() * 99999)).toString();
+            var printElementID = "printElement_" + currentWindowCounter;
             //Native creation of the element is faster..
             var iframe = document.createElement('IFRAME');
             $(iframe).attr({
