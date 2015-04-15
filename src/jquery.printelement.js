@@ -70,7 +70,7 @@
             documentToWriteTo = popupOrIframe.document;
         } else {
             //The random ID is to overcome a safari bug http://www.cjboco.com.sharedcopy.com/post.cfm/442dc92cd1c0ca10a5c35210b8166882.html
-            var printElementID = "printElement_" +  (Math.round(Math.random() * 99999)).toString();
+            var printElementID = "printElement_" + (Math.round(Math.random() * 99999)).toString();
             //Native creation of the element is faster..
             var iframe = document.createElement('IFRAME');
             $(iframe).attr({
